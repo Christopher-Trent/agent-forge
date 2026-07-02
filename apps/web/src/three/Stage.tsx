@@ -8,7 +8,7 @@ export function Stage() {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   return (
     <div className="stage" aria-label="3D holographic mech assembly bay">
-      <Canvas camera={{ position: [4.95, 2.05, 8.05], fov: 43 }} shadows gl={{ antialias: true, toneMapping: ACESFilmicToneMapping, toneMappingExposure: 1.08 }}>
+      <Canvas style={{ position: 'absolute', inset: 0 }} camera={{ position: [4.45, 1.65, 6.45], fov: 39 }} shadows gl={{ antialias: true, toneMapping: ACESFilmicToneMapping, toneMappingExposure: 1.18 }} onCreated={({ camera }) => camera.lookAt(0, 0.82, 0)}>
         <color attach="background" args={['#04070b']} />
         <fog attach="fog" args={['#04070b', 8, 20]} />
         <ambientLight intensity={0.18} />
@@ -29,7 +29,7 @@ export function Stage() {
         <ContactShadows position={[0, -1.02, 0]} opacity={0.48} scale={5.2} blur={2.6} far={3.2} color="#000000" />
         <Environment preset="city" />
         <Effects />
-        <OrbitControls autoRotate={!reduceMotion} autoRotateSpeed={0.45} enableDamping minDistance={4.4} maxDistance={12} target={[0, 0.95, 0]} />
+        <OrbitControls autoRotate={!reduceMotion} autoRotateSpeed={0.45} enableDamping minDistance={4.4} maxDistance={12} target={[0, 0.82, 0]} />
       </Canvas>
       <div className="scanline" />
       <div className="stage-label"><span>ASSEMBLY BAY</span><b>Socket forge live</b></div>
