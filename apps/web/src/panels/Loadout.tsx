@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import type { FeatureDef } from '@agent-forge/shared';
 import { CATALOG } from '../data/catalog';
 import { useForge } from '../store/forge';
+import { getFriendlyMountLabel } from '../three/sockets';
 
 function FeatureCard({ def, suggested }: { def: FeatureDef; suggested: boolean }) {
   const selected = useForge((state) => state.blueprint.coreSkills.includes(def.id));
@@ -11,7 +12,7 @@ function FeatureCard({ def, suggested }: { def: FeatureDef; suggested: boolean }
     <article className={`feature-card ${selected ? 'selected' : ''} ${suggested ? 'suggested' : ''}`}>
       <button className="feature-main" type="button" onClick={() => toggleSkill(def.id)} aria-pressed={selected}>
         <span className="feature-dot" style={{ background: def.accent, boxShadow: `0 0 18px ${def.accent}` }} />
-        <span><b>{def.name}</b><em>{def.slot}</em></span>
+        <span><b>{def.name}</b><em>{getFriendlyMountLabel(def.slot)}</em></span>
       </button>
       <button className="feature-info" type="button" aria-label={`What ${def.name} does`} aria-expanded={open} onClick={() => setOpen((value) => !value)}>i</button>
       {open && <div className="feature-desc" tabIndex={0}><p>{def.description}</p><div>{def.keywords.join(' · ')}</div></div>}
@@ -27,9 +28,9 @@ export function Loadout() {
   }, [blueprint.mission]);
   return (
     <section className="hud panel loadout-panel" aria-labelledby="loadout-title">
-      <div className="panel-kicker">Loadout</div>
-      <h2 id="loadout-title">Core skills <span>{blueprint.coreSkills.length}/3</span></h2>
-      <p className="microcopy">Mission text highlights suggestions. Selection is always explicit.</p>
+      <div className="panel-kicker">Armory</div>
+      <h2 id="loadout-title">Prime systems <span>{blueprint.coreSkills.length}/3</span></h2>
+      <p className="microcopy">The forge scans your mission and lights up likely modules. You choose the three that define the machine.</p>
       <div className="feature-list">{CATALOG.map((def) => <FeatureCard key={def.id} def={def} suggested={suggestedIds.has(def.id)} />)}</div>
     </section>
   );

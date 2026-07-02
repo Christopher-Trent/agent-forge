@@ -1,40 +1,38 @@
 import { Canvas } from '@react-three/fiber';
-import { Environment, OrbitControls, Stars } from '@react-three/drei';
+import { ContactShadows, Environment, OrbitControls, Stars } from '@react-three/drei';
 import { ACESFilmicToneMapping } from 'three';
 import { Mech } from './Mech';
+import { Effects } from './Effects';
 
 export function Stage() {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   return (
-    <div className="stage" aria-label="3D holographic robot assembly bay">
-      <Canvas camera={{ position: [5, 4.2, 8], fov: 42 }} shadows gl={{ antialias: true, toneMapping: ACESFilmicToneMapping, toneMappingExposure: 1.08 }}>
-        <color attach="background" args={['#05080c']} />
-        <fog attach="fog" args={['#05080c', 10, 23]} />
-        <ambientLight intensity={0.28} />
-        <hemisphereLight intensity={0.7} color="#2a5a78" groundColor="#030507" />
-        <pointLight position={[-6, 7, 5]} intensity={60} color="#bfeaff" castShadow />
-        <pointLight position={[7, 3, -5]} intensity={48} color="#ff9a4a" />
-        <spotLight position={[0, 8, 0]} angle={0.35} penumbra={0.8} intensity={70} color="#3fd0ff" />
-        <Stars radius={40} depth={18} count={900} factor={1.8} fade speed={0.4} />
+    <div className="stage" aria-label="3D holographic mech assembly bay">
+      <Canvas camera={{ position: [4.4, 3.0, 6.8], fov: 38 }} shadows gl={{ antialias: true, toneMapping: ACESFilmicToneMapping, toneMappingExposure: 1.05 }}>
+        <color attach="background" args={['#04070b']} />
+        <fog attach="fog" args={['#04070b', 8, 20]} />
+        <ambientLight intensity={0.18} />
+        <hemisphereLight intensity={0.52} color="#2a5a78" groundColor="#020406" />
+        <pointLight position={[-5, 6, 4]} intensity={80} color="#bfeaff" castShadow shadow-mapSize={[1024, 1024]} />
+        <pointLight position={[6, 2.8, -4]} intensity={58} color="#ff8b3d" />
+        <spotLight position={[0, 7, 1.2]} angle={0.34} penumbra={0.78} intensity={88} color="#3fd0ff" castShadow />
+        <Stars radius={42} depth={16} count={600} factor={1.3} fade speed={0.25} />
         <Mech />
         <mesh rotation-x={-Math.PI / 2} position={[0, -1.05, 0]} receiveShadow>
-          <ringGeometry args={[1.8, 2.05, 96]} />
-          <meshStandardMaterial color="#3fd0ff" emissive="#3fd0ff" emissiveIntensity={1.4} transparent opacity={0.42} />
+          <ringGeometry args={[1.85, 2.08, 128]} />
+          <meshStandardMaterial color="#3fd0ff" emissive="#3fd0ff" emissiveIntensity={1.05} transparent opacity={0.36} metalness={0.2} roughness={0.18} />
         </mesh>
+        <mesh rotation-x={-Math.PI / 2} position={[0, -1.035, 0]} receiveShadow>
+          <circleGeometry args={[1.72, 96]} />
+          <meshStandardMaterial color="#07131b" transparent opacity={0.34} metalness={0.6} roughness={0.4} />
+        </mesh>
+        <ContactShadows position={[0, -1.02, 0]} opacity={0.48} scale={5.2} blur={2.6} far={3.2} color="#000000" />
         <Environment preset="city" />
-        <OrbitControls autoRotate={!reduceMotion} autoRotateSpeed={0.55} enableDamping minDistance={4.8} maxDistance={13} target={[0, 1.4, 0]} />
+        <Effects />
+        <OrbitControls autoRotate={!reduceMotion} autoRotateSpeed={0.45} enableDamping minDistance={4.4} maxDistance={12} target={[0, 1.25, 0]} />
       </Canvas>
-      <div className="mech-hologram" aria-hidden="true">
-        <div className="holo-crown" />
-        <div className="holo-head"><span /></div>
-        <div className="holo-shoulders"><i /><i /></div>
-        <div className="holo-torso"><b /></div>
-        <div className="holo-arms"><i /><i /></div>
-        <div className="holo-legs"><i /><i /></div>
-        <div className="holo-base" />
-      </div>
       <div className="scanline" />
-      <div className="stage-label"><span>ASSEMBLY BAY</span><b>Hologram live</b></div>
+      <div className="stage-label"><span>ASSEMBLY BAY</span><b>Socket forge live</b></div>
     </div>
   );
 }

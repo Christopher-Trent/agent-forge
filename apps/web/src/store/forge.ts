@@ -36,7 +36,7 @@ export const useForge = create<ForgeState>()(
           return;
         }
         if (selected.length >= MAX_CORE) {
-          set({ toast: `Max ${MAX_CORE} core skills — remove one first.` });
+          set({ toast: 'Three prime systems max — remove one before installing another.' });
           window.setTimeout(() => get().clearToast(), 2600);
           return;
         }

@@ -1,0 +1,16 @@
+[
+  {
+    "licenseId": "agent-forge-procedural-code-2026-07-02",
+    "assetName": "Agent Forge procedural premium mech and forged fallback modules",
+    "assetType": "procedural-code",
+    "sourceUrl": "local source code",
+    "creator": "Atlas / Mustang",
+    "license": "Project-owned code asset; no external third-party art",
+    "downloadedAt": null,
+    "localPaths": [
+      "/src/three/PrimitiveMech.tsx",
+      "/src/three/FallbackModule.tsx"
+    ],
+    "notes": "No paid, non-redistributable, editorial, or unknown-license assets committed. Runtime GLB/HDRI sockets scaffolded for later curated assets."
+  }
+]
