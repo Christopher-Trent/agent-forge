@@ -24,6 +24,15 @@ export function Stage() {
         <Environment preset="city" />
         <OrbitControls autoRotate={!reduceMotion} autoRotateSpeed={0.55} enableDamping minDistance={4.8} maxDistance={13} target={[0, 1.4, 0]} />
       </Canvas>
+      <div className="mech-hologram" aria-hidden="true">
+        <div className="holo-crown" />
+        <div className="holo-head"><span /></div>
+        <div className="holo-shoulders"><i /><i /></div>
+        <div className="holo-torso"><b /></div>
+        <div className="holo-arms"><i /><i /></div>
+        <div className="holo-legs"><i /><i /></div>
+        <div className="holo-base" />
+      </div>
       <div className="scanline" />
       <div className="stage-label"><span>ASSEMBLY BAY</span><b>Hologram live</b></div>
     </div>
