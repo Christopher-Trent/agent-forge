@@ -8,7 +8,7 @@ export function Stage() {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   return (
     <div className="stage" aria-label="3D holographic mech assembly bay">
-      <Canvas camera={{ position: [4.4, 3.0, 6.8], fov: 38 }} shadows gl={{ antialias: true, toneMapping: ACESFilmicToneMapping, toneMappingExposure: 1.05 }}>
+      <Canvas camera={{ position: [4.8, 2.45, 7.4], fov: 42 }} shadows gl={{ antialias: true, toneMapping: ACESFilmicToneMapping, toneMappingExposure: 1.08 }}>
         <color attach="background" args={['#04070b']} />
         <fog attach="fog" args={['#04070b', 8, 20]} />
         <ambientLight intensity={0.18} />

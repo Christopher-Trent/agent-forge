@@ -13,14 +13,21 @@ function GlbAttachment({ model }: { model: string }) {
 
 export function Attachment({ def, index = 0 }: { def: FeatureDef; index?: number }) {
   const asset = resolveFeatureAsset(def);
+  const mount = asset.mount ?? { scale: 1, position: [0, 0, 0] as [number, number, number], rotation: [0, 0, 0] as [number, number, number] };
 
   if (!asset.model) {
-    return <FallbackModule slot={def.slot} accent={def.accent} index={index} />;
+    return (
+      <group position={mount.position ?? [0, 0, 0]} rotation={mount.rotation ?? [0, 0, 0]} scale={mount.scale ?? 1}>
+        <FallbackModule slot={def.slot} accent={def.accent} index={index} />
+      </group>
+    );
   }
 
   return (
-    <Suspense fallback={<FallbackModule slot={def.slot} accent={def.accent} index={index} />}>
-      <GlbAttachment model={asset.model} />
-    </Suspense>
+    <group position={mount.position ?? [0, 0, 0]} rotation={mount.rotation ?? [0, 0, 0]} scale={mount.scale ?? 1}>
+      <Suspense fallback={<FallbackModule slot={def.slot} accent={def.accent} index={index} />}>
+        <GlbAttachment model={asset.model} />
+      </Suspense>
+    </group>
   );
 }

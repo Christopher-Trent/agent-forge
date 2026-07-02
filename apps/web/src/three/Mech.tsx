@@ -10,7 +10,7 @@ export function Mech() {
   const parts = useMemo(() => selected.map((id) => catalogById[id]).filter(Boolean), [selected]);
 
   if (BASE_MECH_MANIFEST.model) {
-    return <GlbMech model={BASE_MECH_MANIFEST.model} />;
+    return <GlbMech model={BASE_MECH_MANIFEST.model} parts={parts} />;
   }
 
   return <PrimitiveMech parts={parts} />;
